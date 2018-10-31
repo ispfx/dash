@@ -11,6 +11,7 @@ import * as strings from 'DashWebPartStrings';
 import Dash from './components/Dash';
 import { IDashProps } from './components/IDashProps';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
+import SharePointService from '../../services/SharePoint/SharePointService';
 
 export interface IDashWebPartProps {
   description: string;
@@ -31,15 +32,7 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
 
   public onInit(): Promise<void> {
     return super.onInit().then(() => {
-      if (Environment.type == EnvironmentType.Local) {
-        // return MockData;
-      }
-
-      this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/lists/getbytitle('Produce Revenue')/items?$select=Title,January,February&$filter=February gt 20`, SPHttpClient.configurations.v1).then(response => {
-        response.json().then((json: any) => {
-          console.log(json);
-        });
-      });
+      SharePointService.setup(this.context, Environment.type);
     });
   }
 

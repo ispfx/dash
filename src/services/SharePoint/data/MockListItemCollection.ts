@@ -1,0 +1,60 @@
+import { IListItemCollection } from "../IListItem";
+
+export const MockListItemCollection: IListItemCollection = {
+  value: [
+    {
+      Id: 0,
+      Title: '2013',
+      EarningsQ1: 854,
+      EarningsQ2: 251,
+      EarningsQ3: 703,
+      EarningsQ4: 464,
+      Total: 2272,
+    },
+    {
+      Id: 1,
+      Title: '2014',
+      EarningsQ1: 915,
+      EarningsQ2: 194,
+      EarningsQ3: 848,
+      EarningsQ4: 990,
+      Total: 2947,
+    },
+    {
+      Id: 2,
+      Title: '2015',
+      EarningsQ1: 830,
+      EarningsQ2: 893,
+      EarningsQ3: 28,
+      EarningsQ4: 574,
+      Total: 2325,
+    },
+    {
+      Id: 3,
+      Title: '2016',
+      EarningsQ1: 582,
+      EarningsQ2: 813,
+      EarningsQ3: 812,
+      EarningsQ4: 967,
+      Total: 3174,
+    },
+    {
+      Id: 4,
+      Title: '2017',
+      EarningsQ1: 181,
+      EarningsQ2: 166,
+      EarningsQ3: 51,
+      EarningsQ4: 475,
+      Total: 873,
+    },
+    {
+      Id: 5,
+      Title: '2018',
+      EarningsQ1: 802,
+      EarningsQ2: 760,
+      EarningsQ3: 916,
+      EarningsQ4: 401,
+      Total: 2879,
+    },
+  ],
+};
