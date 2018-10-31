@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "dash-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/dash/DashWebPart.js",
+          "manifest": "./src/webparts/dash/DashWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "DashWebPartStrings": "lib/webparts/dash/loc/{locale}.js"
+  }
+}

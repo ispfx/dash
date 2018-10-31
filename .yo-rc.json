@@ -1,0 +1,11 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "spo",
+    "version": "1.6.0",
+    "libraryName": "dash",
+    "libraryId": "0ff6d6a6-c11f-4056-9c17-fe87bf4cc89b",
+    "packageManager": "npm",
+    "componentType": "webpart"
+  }
+}
