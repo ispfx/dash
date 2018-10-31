@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { Version } from '@microsoft/sp-core-library';
+import { Version, Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
@@ -10,6 +10,7 @@ import {
 import * as strings from 'DashWebPartStrings';
 import Dash from './components/Dash';
 import { IDashProps } from './components/IDashProps';
+import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 
 export interface IDashWebPartProps {
   description: string;
@@ -26,6 +27,20 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+  public onInit(): Promise<void> {
+    return super.onInit().then(() => {
+      if (Environment.type == EnvironmentType.Local) {
+        // return MockData;
+      }
+
+      this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/lists/getbytitle('Produce Revenue')/items?$select=Title,January,February&$filter=February gt 20`, SPHttpClient.configurations.v1).then(response => {
+        response.json().then((json: any) => {
+          console.log(json);
+        });
+      });
+    });
   }
 
   protected onDispose(): void {
