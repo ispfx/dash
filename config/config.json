@@ -13,6 +13,7 @@
   },
   "externals": {},
   "localizedResources": {
-    "DashWebPartStrings": "lib/webparts/dash/loc/{locale}.js"
+    "DashWebPartStrings": "lib/webparts/dash/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }

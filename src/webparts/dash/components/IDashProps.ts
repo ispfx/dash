@@ -1,3 +1,7 @@
 export interface IDashProps {
-  description: string;
+  listId: string;
+  selectedFields: string[];
+  chartType: string;
+  chartTitle: string;
+  colors: string[];
 }

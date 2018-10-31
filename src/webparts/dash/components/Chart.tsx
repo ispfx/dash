@@ -10,7 +10,11 @@ import {
 } from 'react-chartjs-2';
 
 export interface IChartProps {
+  listId: string;
+  selectedFields: string[];
+  chartType: string;
   chartTitle: string;
+  colors: string[];
 }
 
 export interface IChartState {
@@ -42,7 +46,11 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
 
         {this.state.error && <p>{this.state.error}</p>}
 
-        <Bar data={this.chartData()} />
+        {this.props.chartType == 'Bar' && <Bar data={this.chartData()} />}
+        {this.props.chartType == 'Line' && <Line data={this.chartData()} />}
+        {this.props.chartType == 'HorizontalBar' && <HorizontalBar data={this.chartData()} />}
+        {this.props.chartType == 'Pie' && <Pie data={this.chartData()} />}
+        {this.props.chartType == 'Doughnut' && <Doughnut data={this.chartData()} />}
 
         <button onClick={this.getItems} disabled={this.state.loading}>
           {this.state.loading ? 'Loading...' : 'Refresh'}
@@ -54,7 +62,7 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
   public getItems(): void {
     this.setState({ loading: true });
 
-    SharePointService.getListItems('9fe2fbea-d7e9-4123-8f03-6bbea967b034').then(items => {
+    SharePointService.getListItems(this.props.listId).then(items => {
       this.setState({
         items: items.value,
         loading: false,
@@ -69,22 +77,9 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
   }
 
   public chartData(): object {
-    const colors = [
-      '#0078d4',
-      '#bad80a',
-      '#00b294',
-      '#5c2d91',
-      '#e3008c',
-    ];
-
     // Chart data
     const data = {
-      labels: [
-        'Q1',
-        'Q2',
-        'Q3',
-        'Q4',
-      ],
+      labels: [],
       datasets: [],
     };
 
@@ -92,16 +87,36 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
     this.state.items.map((item, i) => {
       // Create dataset
       const dataset = {
-        label: item.Title,
-        data: [
-          item.EarningsQ1,
-          item.EarningsQ2,
-          item.EarningsQ3,
-          item.EarningsQ4,
-        ],
-        backgroundColor: colors[i % colors.length],
-        borderColor: colors[i % colors.length],
+        label: '',
+        data: [],
+        backgroundColor: this.props.colors[i % this.props.colors.length],
+        borderColor: this.props.colors[i % this.props.colors.length],
       };
+
+      // Build dataset
+      this.props.selectedFields.map((field, j) => {
+        // Get the value
+        let value = item[field];
+        if (value === undefined && item[`OData_${field}`] !== undefined) {
+          value = item[`OData_${field}`];
+        }
+
+        // Add labels
+        if (i == 0 && j > 0) {
+          data.labels.push(field);
+        }
+
+        if (j == 0) {
+          dataset.label = value;
+        } else {
+          dataset.data.push(value);
+        }
+      });
+
+      // Line chart
+      if (this.props.chartType == 'Line') {
+        dataset['fill'] = false;
+      }
 
       data.datasets.push(dataset);
     });
