@@ -19,6 +19,7 @@ export class SharePointServiceManager {
 
   public get(relativeEndpointUrl: string): Promise<any> {
     return this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}${relativeEndpointUrl}`, SPHttpClient.configurations.v1).then(response => {
+      if (!response.ok) return Promise.reject('GET Request Failed');
       return response.json();
     }).catch(error => {
       return Promise.reject(error);
