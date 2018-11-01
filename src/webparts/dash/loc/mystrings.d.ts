@@ -1,7 +1,23 @@
 declare interface IDashWebPartStrings {
+  ChartBar: string;
+  ChartBarHorizontal: string;
+  ChartData: string;
+  ChartDonut: string;
+  ChartLine: string;
+  ChartPie: string;
+  ChartSettings: string;
+  ChartStyle: string;
+  ChartTitle: string;
+  ChartType: string;
+  Colors: string;
+  Error: string;
+  Intro: string;
+  List: string;
+  Loading: string;
+  LoadingChartData: string;
   PropertyPaneDescription: string;
-  BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  Refresh: string;
+  SelectedFields: string;
 }
 
 declare module 'DashWebPartStrings' {

@@ -6,6 +6,7 @@ import {
   MessageBar,
   MessageBarType,
 } from 'office-ui-fabric-react/lib/MessageBar';
+import * as strings from 'DashWebPartStrings';
 
 export default class Dash extends React.Component<IDashProps, {}> {
   public render(): React.ReactElement<IDashProps> {
@@ -19,7 +20,7 @@ export default class Dash extends React.Component<IDashProps, {}> {
             chartTitle={this.props.chartTitle}
             colors={this.props.colors} /> :
 
-          <MessageBar>Select a list to continue&hellip;</MessageBar>
+          <MessageBar>{strings.Intro}</MessageBar>
         }
       </div>
     );

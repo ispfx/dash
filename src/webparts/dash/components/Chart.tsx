@@ -17,6 +17,11 @@ import {
   Spinner,
   SpinnerSize,
 } from 'office-ui-fabric-react/lib/Spinner';
+import {
+  MessageBar,
+  MessageBarType,
+} from 'office-ui-fabric-react/lib/MessageBar';
+import * as strings from 'DashWebPartStrings';
 
 export interface IChartProps {
   listId: string;
@@ -53,10 +58,10 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
       <div>
         <h1 className={styles.chartTitle}>{this.props.chartTitle}</h1>
 
-        {this.state.error && <p>{this.state.error}</p>}
+        {this.state.error && <MessageBar messageBarType={MessageBarType.error}>{this.state.error}</MessageBar>}
 
         <div className={styles.chartBody}>
-          {this.state.loading && <Spinner className={styles.chartSpinner} size={SpinnerSize.large} label="Loading chart data..." ariaLive="assertive" />}
+          {this.state.loading && <Spinner className={styles.chartSpinner} size={SpinnerSize.large} label={strings.LoadingChartData} ariaLive="assertive" />}
 
           {this.props.chartType == 'Bar' && <Bar data={this.chartData()} />}
           {this.props.chartType == 'Line' && <Line data={this.chartData()} />}
@@ -67,7 +72,7 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
 
         <footer className={styles.chartFooter}>
           <ActionButton iconProps={{ iconName: 'Refresh' }} onClick={this.getItems} disabled={this.state.loading}>
-            {this.state.loading ? 'Loading...' : 'Refresh'}
+            {this.state.loading ? strings.Loading : strings.Refresh}
           </ActionButton>
         </footer>
       </div>
@@ -85,7 +90,7 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
       });
     }).catch(error => {
       this.setState({
-        error: 'Something went wrong!',
+        error: strings.Error,
         loading: false,
       });
     });
