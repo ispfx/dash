@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { Version, Environment, EnvironmentType } from '@microsoft/sp-core-library';
+import { Version, Environment } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
@@ -17,7 +17,6 @@ import { PropertyFieldMultiSelect } from '@pnp/spfx-property-controls/lib/Proper
 import * as strings from 'DashWebPartStrings';
 import Dash from './components/Dash';
 import { IDashProps } from './components/IDashProps';
-import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import SharePointService from '../../services/SharePoint/SharePointService';
 
 export interface IDashWebPartProps {

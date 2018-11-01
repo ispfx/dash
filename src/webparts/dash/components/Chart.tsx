@@ -9,10 +9,7 @@ import {
   Doughnut,
 } from 'react-chartjs-2';
 import styles from './Chart.module.scss';
-import {
-  ActionButton,
-  IButtonProps,
-} from 'office-ui-fabric-react/lib/Button';
+import { ActionButton } from 'office-ui-fabric-react/lib/Button';
 import {
   Spinner,
   SpinnerSize,
@@ -77,6 +74,10 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
         </footer>
       </div>
     );
+  }
+
+  public componentDidMount(): void {
+    this.getItems();
   }
 
   public getItems(): void {
