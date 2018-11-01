@@ -200,6 +200,11 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
     this.getLists().then(listOptions => {
       this.listOptions = listOptions;
       this.context.propertyPane.refresh();
+    }).then(() => {
+      this.getFields().then(fieldOptions => {
+        this.fieldOptions = fieldOptions;
+        this.context.propertyPane.refresh();
+      });
     });
   }
 
