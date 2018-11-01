@@ -1,5 +1,6 @@
 define([], function() {
   return {
+    "AddColor": "Add Color",
     "ChartBar": "Bar",
     "ChartBarHorizontal": "Bar (Horizontal)",
     "ChartData": "Chart Data",
@@ -11,6 +12,7 @@ define([], function() {
     "ChartTitle": "Chart Title",
     "ChartType": "Chart Type",
     "Colors": "Colors",
+    "DeleteColor": "Delete",
     "Error": "Something went wrong!",
     "Intro": "Select a list to continue...",
     "List": "List",

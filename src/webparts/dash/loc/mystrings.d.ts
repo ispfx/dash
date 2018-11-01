@@ -1,4 +1,5 @@
 declare interface IDashWebPartStrings {
+  AddColor: string;
   ChartBar: string;
   ChartBarHorizontal: string;
   ChartData: string;
@@ -10,6 +11,7 @@ declare interface IDashWebPartStrings {
   ChartTitle: string;
   ChartType: string;
   Colors: string;
+  DeleteColor: string;
   Error: string;
   Intro: string;
   List: string;

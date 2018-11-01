@@ -1,4 +1,7 @@
 import * as React from 'react';
+import ColorSwatch from './ColorSwatch';
+import styles from './ColorPalette.module.scss';
+import * as strings from 'DashWebPartStrings';
 
 export interface IColorPaletteProps {
   colors: string[];
@@ -11,17 +14,22 @@ export class ColorPalette extends React.Component<IColorPaletteProps> {
     super(props);
 
     // Bind methods
-
+    this.onChanged = this.onChanged.bind(this);
+    this.addColor = this.addColor.bind(this);
   }
 
   public render(): JSX.Element {
     return (
-      <div>
+      <div className={styles.colorGrid}>
         {this.props.colors.map((color, i) => {
           return (
-            <input key={i} type="text" value={color} onChange={event => this.onChanged(event.currentTarget.value, i)} />
+            <ColorSwatch key={i} color={color} onColorChanged={(newColor) => this.onChanged(newColor, i)} onColorDeleted={() => this.onChanged(null, i)} />
           );
         })}
+        <button className={styles.addColorBtn} onClick={this.addColor}>
+          <i className="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+          <span className="ms-screenReaderOnly">{strings.AddColor}</span>
+        </button>
       </div>
     );
   }
@@ -29,6 +37,17 @@ export class ColorPalette extends React.Component<IColorPaletteProps> {
   public onChanged(newColor: string, index: number): void {
     const updatedColors = this.props.colors;
     updatedColors[index] = newColor;
+
+    if (newColor === null) {
+      updatedColors.splice(index, 1);
+    }
+
+    this.props.onChanged(updatedColors);
+  }
+
+  public addColor(): void {
+    const updatedColors = this.props.colors;
+    updatedColors.push('#000000');
 
     this.props.onChanged(updatedColors);
   }
