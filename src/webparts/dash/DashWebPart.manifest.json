@@ -18,7 +18,7 @@
     "group": { "default": "Other" },
     "title": { "default": "Dash" },
     "description": { "default": "Dash description" },
-    "officeFabricIconFontName": "BarChart4",
+    "officeFabricIconFontName": "Page",
     "properties": {
       "listId": "",
       "selectedFields": [],
