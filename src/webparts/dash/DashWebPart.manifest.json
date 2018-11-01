@@ -21,7 +21,7 @@
     "officeFabricIconFontName": "Page",
     "properties": {
       "listId": "",
-      "selectedFields": "",
+      "selectedFields": [],
       "chartType": "Bar",
       "chartTitle": "",
       "color1": "#0078d4",
