@@ -24,9 +24,11 @@
       "selectedFields": [],
       "chartType": "Bar",
       "chartTitle": "",
-      "color1": "#0078d4",
-      "color2": "#bad80a",
-      "color3": "#00b294"
+      "colors": [
+        "#0078d4",
+        "#bad80a",
+        "#00b294"
+      ]
     }
   }]
 }

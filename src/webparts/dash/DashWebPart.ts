@@ -14,19 +14,19 @@ import {
 } from '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker';
 import { PropertyFieldMultiSelect } from '@pnp/spfx-property-controls/lib/PropertyFieldMultiSelect';
 
+import { PropertyPaneColorPalette } from '../../controls/PropertyPaneColorPalette/PropertyPaneColorPalette';
 import * as strings from 'DashWebPartStrings';
 import Dash from './components/Dash';
 import { IDashProps } from './components/IDashProps';
 import SharePointService from '../../services/SharePoint/SharePointService';
+import { updateA } from 'office-ui-fabric-react/lib/utilities/color';
 
 export interface IDashWebPartProps {
   listId: string;
   selectedFields: string[];
   chartType: string;
   chartTitle: string;
-  color1: string;
-  color2: string;
-  color3: string;
+  colors: string[];
 }
 
 export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps> {
@@ -46,11 +46,7 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
         selectedFields: this.properties.selectedFields,
         chartType: this.properties.chartType,
         chartTitle: this.properties.chartTitle,
-        colors: [
-          this.properties.color1,
-          this.properties.color2,
-          this.properties.color3,
-        ],
+        colors: this.properties.colors,
       }
     );
 
@@ -117,38 +113,11 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
             {
               groupName: strings.ChartStyle,
               groupFields: [
-                PropertyFieldColorPicker('color1', {
+                new PropertyPaneColorPalette('colors', {
                   label: strings.Colors,
-                  selectedColor: this.properties.color1,
-                  onPropertyChange: this.onPropertyPaneFieldChanged,
-                  properties: this.properties,
-                  disabled: false,
-                  alphaSliderHidden: false,
-                  style: PropertyFieldColorPickerStyle.Inline,
-                  iconName: 'Precipitation',
-                  key: 'colorPicker1'
-                }),
-                PropertyFieldColorPicker('color2', {
-                  label: strings.Colors,
-                  selectedColor: this.properties.color2,
-                  onPropertyChange: this.onPropertyPaneFieldChanged,
-                  properties: this.properties,
-                  disabled: false,
-                  alphaSliderHidden: false,
-                  style: PropertyFieldColorPickerStyle.Inline,
-                  iconName: 'Precipitation',
-                  key: 'colorPicker2'
-                }),
-                PropertyFieldColorPicker('color3', {
-                  label: strings.Colors,
-                  selectedColor: this.properties.color3,
-                  onPropertyChange: this.onPropertyPaneFieldChanged,
-                  properties: this.properties,
-                  disabled: false,
-                  alphaSliderHidden: false,
-                  style: PropertyFieldColorPickerStyle.Inline,
-                  iconName: 'Precipitation',
-                  key: 'colorPicker3'
+                  colors: this.properties.colors,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  key: 'colors_palette',
                 }),
               ],
             }
@@ -217,6 +186,12 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
         this.fieldOptions = fieldOptions;
         this.context.propertyPane.refresh();
       });
+    }
+
+    else if (propertyPath === 'colors' && newValue) {
+      this.properties.colors = newValue;
+      this.context.propertyPane.refresh();
+      this.render();
     }
   }
 }
