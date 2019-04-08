@@ -3,7 +3,7 @@
   "solution": {
     "name": "dash-client-side-solution",
     "id": "0ff6d6a6-c11f-4056-9c17-fe87bf4cc89b",
-    "version": "1.2.0.0",
+    "version": "1.3.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true
   },
