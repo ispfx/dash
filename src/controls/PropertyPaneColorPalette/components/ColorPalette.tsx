@@ -34,12 +34,13 @@ export class ColorPalette extends React.Component<IColorPaletteProps> {
     );
   }
 
-  public onChanged(newColor: string, index: number): void {
+  public onChanged(newColor: string | null, index: number): void {
     const updatedColors = this.props.colors;
-    updatedColors[index] = newColor;
 
     if (newColor === null) {
       updatedColors.splice(index, 1);
+    } else {
+      updatedColors[index] = newColor;
     }
 
     this.props.onChanged(updatedColors);

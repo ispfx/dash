@@ -100,8 +100,8 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
   public chartData(): object {
     // Chart data
     const data = {
-      labels: [],
-      datasets: [],
+      labels: [] as string[],
+      datasets: [] as any[],
     };
 
     // Add datasets
@@ -109,7 +109,7 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
       // Create dataset
       const dataset = {
         label: '',
-        data: [],
+        data: [] as any[],
         backgroundColor: this.props.colors[i % this.props.colors.length],
         borderColor: this.props.colors[i % this.props.colors.length],
       };

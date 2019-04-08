@@ -8,10 +8,6 @@ import {
   PropertyPaneDropdown,
   IPropertyPaneDropdownOption
 } from '@microsoft/sp-webpart-base';
-import {
-  PropertyFieldColorPicker,
-  PropertyFieldColorPickerStyle,
-} from '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker';
 import { PropertyFieldMultiSelect } from '@pnp/spfx-property-controls/lib/PropertyFieldMultiSelect';
 
 import { PropertyPaneColorPalette } from '../../controls/PropertyPaneColorPalette/PropertyPaneColorPalette';
@@ -19,7 +15,6 @@ import * as strings from 'DashWebPartStrings';
 import Dash from './components/Dash';
 import { IDashProps } from './components/IDashProps';
 import SharePointService from '../../services/SharePoint/SharePointService';
-import { updateA } from 'office-ui-fabric-react/lib/utilities/color';
 
 export interface IDashWebPartProps {
   listId: string;

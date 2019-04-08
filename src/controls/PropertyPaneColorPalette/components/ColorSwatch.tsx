@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ColorPicker } from 'office-ui-fabric-react/lib/ColorPicker';
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
 import { createRef } from 'office-ui-fabric-react/lib/Utilities';
-import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import styles from './ColorSwatch.module.scss';
 import * as strings from 'DashWebPartStrings';
 

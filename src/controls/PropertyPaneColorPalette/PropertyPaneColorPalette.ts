@@ -5,7 +5,7 @@ import {
   PropertyPaneFieldType,
   IPropertyPaneCustomFieldProps,
 } from '@microsoft/sp-webpart-base';
-import { ColorPalette, IColorPaletteProps } from './components/ColorPalette';
+import { ColorPalette } from './components/ColorPalette';
 
 export interface IPropertyPaneColorPaletteProps {
   label: string;
