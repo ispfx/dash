@@ -16,6 +16,7 @@ import * as strings from 'DashWebPartStrings';
 import Dash from './components/Dash';
 import { IDashProps } from './components/IDashProps';
 import SharePointService from '../../services/SharePoint/SharePointService';
+import { ThemeProvider, IReadonlyTheme, ThemeChangedEventArgs } from '@microsoft/sp-component-base';
 
 export interface IDashWebPartProps {
   listId: string;
@@ -26,6 +27,10 @@ export interface IDashWebPartProps {
 }
 
 export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps> {
+  // Theme variants
+  private themeProvider: ThemeProvider;
+  private themeVariant: IReadonlyTheme | undefined;
+
   // Teams context
   private teamsContext: microsoftTeams.Context;
 
@@ -48,6 +53,7 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
         chartType: this.properties.chartType,
         chartTitle: this.properties.chartTitle,
         colors: this.properties.colors,
+        theme: this.themeVariant,
       }
     );
 
@@ -56,14 +62,28 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
 
   public onInit(): Promise<void> {
     return super.onInit().then(() => {
+      // Setup SP service
       SharePointService.setup(this.context, Environment.type);
 
+      // Get theme variant
+      this.themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
+      this.themeVariant = this.themeProvider.tryGetTheme();
+
+      // Listen for theme changes
+      this.themeProvider.themeChangedEvent.add(this, this.onThemeChanged);
+
+      // Get teams context
       if (this.context.microsoftTeams) {
         return this.context.microsoftTeams.getContext(context => {
           this.teamsContext = context;
         });
       }
     });
+  }
+
+  private onThemeChanged(args: ThemeChangedEventArgs): void {
+    this.themeVariant = args.theme;
+    this.render();
   }
 
   protected onDispose(): void {

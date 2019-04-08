@@ -19,6 +19,7 @@ import {
   MessageBarType,
 } from 'office-ui-fabric-react/lib/MessageBar';
 import * as strings from 'DashWebPartStrings';
+import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 export interface IChartProps {
   listId: string;
@@ -26,6 +27,7 @@ export interface IChartProps {
   chartType: string;
   chartTitle: string;
   colors: string[];
+  theme: IReadonlyTheme | undefined;
 }
 
 export interface IChartState {
@@ -68,7 +70,9 @@ export default class Chart extends React.Component<IChartProps, IChartState> {
         </div>
 
         <footer className={styles.chartFooter}>
-          <ActionButton iconProps={{ iconName: 'Refresh' }} onClick={this.getItems} disabled={this.state.loading}>
+          <ActionButton iconProps={{ iconName: 'Refresh' }} onClick={this.getItems} disabled={this.state.loading} style={{
+            color: this.props.theme ? this.props.theme.semanticColors.bodyText : 'inherit',
+          }}>
             {this.state.loading ? strings.Loading : strings.Refresh}
           </ActionButton>
         </footer>

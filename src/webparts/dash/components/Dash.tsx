@@ -14,7 +14,8 @@ export default class Dash extends React.Component<IDashProps, {}> {
             selectedFields={this.props.selectedFields}
             chartType={this.props.chartType}
             chartTitle={this.props.chartTitle}
-            colors={this.props.colors} /> :
+            colors={this.props.colors}
+            theme={this.props.theme} /> :
 
           <MessageBar>{strings.Intro}</MessageBar>
         }
