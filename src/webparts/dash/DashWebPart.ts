@@ -9,6 +9,7 @@ import {
   IPropertyPaneDropdownOption
 } from '@microsoft/sp-webpart-base';
 import { PropertyFieldMultiSelect } from '@pnp/spfx-property-controls/lib/PropertyFieldMultiSelect';
+import * as microsoftTeams from '@microsoft/teams-js';
 
 import { PropertyPaneColorPalette } from '../../controls/PropertyPaneColorPalette/PropertyPaneColorPalette';
 import * as strings from 'DashWebPartStrings';
@@ -25,6 +26,9 @@ export interface IDashWebPartProps {
 }
 
 export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps> {
+  // Teams context
+  private teamsContext: microsoftTeams.Context;
+
   // List options state
   private listOptions: IPropertyPaneDropdownOption[];
   private listOptionsLoading: boolean = false;
@@ -34,6 +38,8 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
   private fieldOptionsLoading: boolean = false;
 
   public render(): void {
+    if (this.teamsContext) console.log('Hello from Teams!');
+
     const element: React.ReactElement<IDashProps > = React.createElement(
       Dash,
       {
@@ -51,6 +57,12 @@ export default class DashWebPart extends BaseClientSideWebPart<IDashWebPartProps
   public onInit(): Promise<void> {
     return super.onInit().then(() => {
       SharePointService.setup(this.context, Environment.type);
+
+      if (this.context.microsoftTeams) {
+        return this.context.microsoftTeams.getContext(context => {
+          this.teamsContext = context;
+        });
+      }
     });
   }
 
